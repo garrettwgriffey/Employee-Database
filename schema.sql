@@ -2,23 +2,28 @@ DROP DATABASE IF EXISTS employees_db;
 CREATE DATABASE employees_db;
 USE employees_db;
 
-CREATE TABLE department (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30),
+CREATE TABLE departments (
+  id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL
+);
+CREATE TABLE roles (
+  id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(45) NOT NULL,
+  salary  DECIMAL NOT NULL,
+  department_id INT(30) NOT NULL,
+  CONSTRAINT fk_department FOREIGN KEY(departmentId) REFERENCES department(id) ON DELETE CASCADE
+);
+CREATE TABLE  employees (
+  id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
+  role_id INT(30) NOT NULL,
+  manager_id INT(30),
+  CONSTRAINT fk_role FOREIGN KEY(roleId) REFERENCES role(id) ON DELETE CASCADE
 );
 
-CREATE TABLE role(
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  title VARCHAR(30),
-  salary DECIMAL NOT NULL,
-  departmentId INT NOT NULL,
-  CONSTRAINT fk_department FOREIGN KEY(departmentId) REFERENCES department(id) ON DELETE CASCADE,
-);
+roles
+  CONSTRAINT fk_department FOREIGN KEY(departmentId) REFERENCES department(id) ON DELETE CASCADE
 
-CREATE TABLE employee(
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  firstName VARCHAR(30) NOT NULL,
-  lastName VARCHAR(30) NOT NULL,
-  managerId INT(30) NOT NULL,
-  CONSTRAINT fk_role FOREIGN KEY(roleId) REFERENCES role(id) ON DELETE CASCADE,
-);
+  employees
+  CONSTRAINT fk_role FOREIGN KEY(roleId) REFERENCES role(id) ON DELETE CASCADE
