@@ -1,5 +1,3 @@
--- create employee names, roles, etc
-
 INSERT INTO employee (firstName, lastName, role_id, manager_id)
 VALUES 
 ("John", "Doe", 1, null),
