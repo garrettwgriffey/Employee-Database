@@ -11,7 +11,7 @@ CREATE TABLE roles (
   title VARCHAR(45) NOT NULL,
   salary  DECIMAL NOT NULL,
   department_id INT(30) NOT NULL,
-  CONSTRAINT fk_department FOREIGN KEY(departmentId) REFERENCES department(id) ON DELETE CASCADE
+  CONSTRAINT fk_department FOREIGN KEY(department_Id) REFERENCES department(id) ON DELETE CASCADE
 );
 CREATE TABLE  employees (
   id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -25,5 +25,5 @@ CREATE TABLE  employees (
 roles
   CONSTRAINT fk_department FOREIGN KEY(departmentId) REFERENCES department(id) ON DELETE CASCADE
 
-  employees
+employees
   CONSTRAINT fk_role FOREIGN KEY(roleId) REFERENCES role(id) ON DELETE CASCADE

@@ -1,4 +1,4 @@
-INSERT INTO employee (firstName, lastName, role_id, manager_id)
+INSERT INTO employees (firstName, lastName, role_id, manager_id)
 VALUES 
 ("John", "Doe", 1, null),
 ("Jane", "Doe", 2, null),
@@ -9,7 +9,7 @@ VALUES
 ("Peter", "Griffin", 1, null),
 ("Mick", "Jagger", 2, null),
 ("Justin", "Beiber", 3, null),
-("Tony", "Montana", 4, null)
+("Tony", "Montana", 4, null);
 
 INSERT INTO role (title, salary, department_id)
 VALUES
@@ -20,7 +20,7 @@ VALUES
 ("Graphic Designer", 70000, 4),
 ("Recruiter", 65000, 5),
 ("Scientist", 70000, 6),
-("Salesman", 80000, 2)
+("Salesman", 80000, 2);
 
 INSERT INTO department (name)
 VALUES
