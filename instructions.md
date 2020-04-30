@@ -135,3 +135,10 @@ You are required to submit the following:
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
+//npm i mysql
+//npm i inquirer -- name this ask, like const ask = require('inquirer') you'll be using it ALOT and ask has less error possible.
+//make a connection (take one from a class activity and change the words
+//paste your schema and seeds into Workbench, test your connection
+//start a function to start asking your questions etc (think of the last employee template homework, start there)
+//figure out how to modify your tables via VSCode with answers, etc. (ice cream activity)
