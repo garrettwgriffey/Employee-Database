@@ -1,14 +1,15 @@
 const ask = require("inquirer");
 const q = require("./javascript/questions");
 const connection = require("./javascript/connection");
-// const { printTable } = require("console-table-printer");
 
+// mySQL connection
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
   firstQ();
 });
 
+//displays table with results in command-line
 function viewDb(table, cb=null) {
   connection.query(`SELECT * FROM ${table}`, function(err, res) {
     if (err) throw err;
@@ -21,6 +22,7 @@ function viewDb(table, cb=null) {
   });
 }
 
+// function for updating database
 function addToDb(table, questions) {
   ask.prompt(questions).then(answers => {
     const keys = Object.keys(answers);
@@ -35,6 +37,7 @@ function addToDb(table, questions) {
   });
   }
 
+  // function for updating database
 function updateEmployeeRoles() {
   ask.prompt(q.updateEmpRole).then(answers => {
     const values = Object.values(answers);
@@ -46,8 +49,8 @@ function updateEmployeeRoles() {
   });
 }
 
+// initial question prompt with promise and switch statement
 function firstQ(){
-  // inquirer.prompt goes here first question
   ask.prompt({
     type: "list",
     message: "What do you want to do?",
@@ -55,7 +58,6 @@ function firstQ(){
     name: "firstQ"
   })
   .then(answer => { 
-    // const action = answer.firstQ;
     switch (answer.firstQ) {
       case "Add department":
         addToDb("departments", q.addDept);
