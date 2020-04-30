@@ -1,6 +1,6 @@
 const ask = require("inquirer");
-const q = require("./questions");
-const connection = require("./connection");
+const q = require("./javascript/questions");
+const connection = require("./javascript/connection");
 // const { printTable } = require("console-table-printer");
 
 connection.connect(function(err) {
@@ -9,11 +9,15 @@ connection.connect(function(err) {
   firstQ();
 });
 
-function viewDb(table) {
+function viewDb(table, cb=null) {
   connection.query(`SELECT * FROM ${table}`, function(err, res) {
     if (err) throw err;
     console.table(res);
-    connection.end();
+    if (cb) {
+      cb();
+    } else {
+      connection.end();
+    }
   });
 }
 
@@ -31,19 +35,14 @@ function addToDb(table, questions) {
   });
   }
 
-function addRole(title, salary, department_id) {
-  connection.query(`INSERT INTO roles (title, salary, department_id) VALUES (${title, salary, department_id})`, function(err, res) {
-    if (err) throw err;
-    console.log(res);
-    connection.end();
-  });
-}
-
-function addEmployee() {
-  connection.query("SELECT * FROM departments", function(err, res) {
-    if (err) throw err;
-    console.log(res);
-    connection.end();
+function updateEmployeeRoles() {
+  ask.prompt(q.updateEmpRole).then(answers => {
+    const values = Object.values(answers);
+    connection.query(`UPDATE employees SET role_id = ${values[1]} WHERE id = ${values[0]};`, function(err, res) {
+      if (err) throw err;
+      console.table(res);
+      connection.end();
+    }); 
   });
 }
 
@@ -76,9 +75,9 @@ function firstQ(){
       case "View employee":
         viewDb("employees");
         break;
-      // case "Update employee roles";
-      //   updateEmployeeRoles;
-      //   break;
+      case "Update employee roles":
+        viewDb("employees", updateEmployeeRoles);
+        break;
     }
 
   });
