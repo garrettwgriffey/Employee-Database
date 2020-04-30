@@ -23,6 +23,8 @@ npm i inquirer mysql express
 Node.Js, Express, JavaScript, GitHub, MySQL, Command- Line
 ## **Usage**
 
+<img src = "assets/empDBGIF.gif">
+
 ## **Contributors**
 Garrett Wells Griffey
 ## **Contact**
