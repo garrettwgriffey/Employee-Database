@@ -3,14 +3,14 @@ module.exports = {
     {
       type: "input",
       message: "Enter a DEPARTMENT NAME you want to add:",
-      name: "department",
+      name: "name",
     },
   ],
   addRole: [
     {
       type: "input",
       message: "Enter the ROLE TITLE you want to add:",
-      name: "title",
+      name: "title"
     },
     {
       type: "input",
@@ -26,8 +26,23 @@ module.exports = {
   addEmployee: [
     {
       type: "input",
-      message: "Enter the EMPLOYEE NAME you want to add:",
-      name: "employee",
+      message: "Enter the EMPLOYEE'S FIRST NAME you want to add:",
+      name: "first_name",
     },
+    {
+        type: "input",
+        message: "Enter the EMPLOYEE'S LAST NAME you want to add:",
+        name: "last_name",
+      },
+      {
+        type: "input",
+        message: "Enter the ROLE ID you want to add:",
+        name: "role_id",
+      },
+      {
+        type: "input",
+        message: "Enter the MANAGER ID you want to add:",
+        name: "manager_id",
+      },
   ],
 };
