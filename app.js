@@ -27,20 +27,12 @@ function viewDepartments() {
   });
 }
 
-function addDepartment() {
-  ask.prompt({
-    name: "department",
-    type: "input",
-    message: "Add a department"
-  })
-  .then(answer =>{
-    db.createDepartment(answer.department)
-  } )
-  // connection.query(`INSERT INTO departments(name)VALUES (${name})`, function(err, res) {
-  //   if (err) throw err;
-  //   console.log(res);
-  //   connection.end();
-  // });
+function addDepartment(name) {
+  connection.query(`INSERT INTO departments(name)VALUES (${name})`, function(err, res) {
+    if (err) throw err;
+    console.log(res);
+    connection.end();
+  });
 }
 
 function addRole(title, salary, department_id) {
@@ -76,20 +68,21 @@ function firstQ(){
       case "View department":
         viewDepartments();
         break;
-      case 2:
-         day = "Tuesday";
+      case "Add role":
+        addRole();
         break;
-      case 3:
-        day = "Wednesday";
+      case "View role":
+        viewRoles();
         break;
-      case 4:
-        day = "Thursday";
+      case "Add employee":
+        addEmployee();
         break;
-      case 5:
-        day = "Friday";
+      case "View employee":
+        viewEmployees();
         break;
-      case 6:
-        day = "Saturday";
+      // case "Update employee roles";
+      //   updateEmployeeRoles;
+      //   break;
     }
 
   });
