@@ -1,28 +1,18 @@
-const mysql = require("mysql");
 const ask = require("inquirer");
 const q = require("./questions");
+const connection = require("./connection");
 // const { printTable } = require("console-table-printer");
 
-function viewEmployees() {
-  connection.query("SELECT * FROM employees", function(err, res) {
-    if (err) throw err;
-    console.log(res);
-    connection.end();
-  });
-}
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId);
+  firstQ();
+});
 
-function viewRoles() {
-  connection.query("SELECT * FROM roles", function(err, res) {
+function viewDb(table) {
+  connection.query(`SELECT * FROM ${table}`, function(err, res) {
     if (err) throw err;
-    console.log(res);
-    connection.end();
-  });
-}
-
-function viewDepartments() {
-  connection.query("SELECT * FROM departments", function(err, res) {
-    if (err) throw err;
-    console.log(res);
+    console.table(res);
     connection.end();
   });
 }
@@ -61,24 +51,24 @@ function firstQ(){
   })
   .then(answer => { 
     // const action = answer.firstQ;
-    switch (answer.action) {
+    switch (answer.firstQ) {
       case "Add department":
         addDepartment();
         break;
       case "View department":
-        viewDepartments();
+        viewDb("departments");
         break;
       case "Add role":
         addRole();
         break;
       case "View role":
-        viewRoles();
+        viewDb("roles");
         break;
       case "Add employee":
         addEmployee();
         break;
       case "View employee":
-        viewEmployees();
+        viewDb("employees");
         break;
       // case "Update employee roles";
       //   updateEmployeeRoles;
@@ -87,3 +77,5 @@ function firstQ(){
 
   });
 }
+
+
